@@ -158,11 +158,6 @@ def update_graph(giocatore, partita):
 
     return fig
 
-# # Ensure you're running the server properly with the app.layout and app.run_server() commands.
-# if __name__ == '__main__':
-#     app.layout = layout
-#     app.run_server(debug=True)
-
 
 if __name__ == '__main__':
     app.layout = layout
