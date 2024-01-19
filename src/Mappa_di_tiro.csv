@@ -1,0 +1,108 @@
+,Partita,Giocatore,x,y,made,index
+0,San Cesareo,Alessio,27.0,25.0,0,
+1,San Cesareo,Alessio,27.0,10.0,0,
+2,San Cesareo,Fala,7.0,25.0,1,
+3,San Cesareo,Fala,6.0,26.0,1,
+4,San Cesareo,Fala,27.0,28.0,0,
+5,San Cesareo,Gabbri,7.0,25.0,1,
+6,San Cesareo,Marco,7.0,22.0,1,
+7,San Cesareo,Marco,23.0,25.0,0,
+8,San Cesareo,Marco,20.0,40.0,0,
+9,San Cesareo,Marco,24.0,44.0,1,
+10,San Cesareo,Mario,7.0,23.0,1,
+11,San Cesareo,Mario,8.0,24.0,1,
+12,San Cesareo,Mario,8.0,24.5,1,
+13,San Cesareo,Mario,8.0,25.5,1,
+14,San Cesareo,Mario,30.0,35.0,0,
+15,San Cesareo,Leo,7.0,26.0,1,
+16,San Cesareo,Leo,22.0,17.0,0,
+17,San Cesareo,Leo,23.0,16.0,0,
+18,San Cesareo,Peppe,5.0,0.8,1,
+19,San Cesareo,Peppe,25.0,4.0,0,
+20,San Cesareo,Peppe,6.0,25.0,1,
+21,San Cesareo,Peppe,7.0,26.0,1,
+22,San Cesareo,Peppe,6.0,27.0,0,
+23,San Cesareo,Peppe,7.5,27.0,0,
+24,San Cesareo,Peppe,8.0,34.0,1,
+25,San Cesareo,Peppe,12.0,36.0,1,
+26,San Cesareo,Peppe,22.0,32.0,0,
+27,San Cesareo,Peppe,28.0,33.0,0,
+28,San Cesareo,Peppe,28.0,33.5,0,
+29,San Cesareo,Gughi,5.0,20.0,1,
+30,San Cesareo,Gughi,5.5,28.0,0,
+31,San Cesareo,Gughi,5.5,43.0,1,
+32,San Cesareo,Gughi,25.0,32.0,0,
+33,San Cesareo,Gughi,26.0,32.0,0,
+34,San Cesareo,Gughi,34.0,28.0,0,
+35,San Cesareo,Ivan,6.0,23.0,1,
+36,San Cesareo,Matteo,4.0,6.0,1,
+37,San Cesareo,Matteo,7.0,23.0,1,
+38,San Cesareo,Matteo,6.0,25.0,1,
+39,San Cesareo,Matteo,5.5,25.5,0,
+40,San Cesareo,Matteo,6.0,27.0,1,
+41,San Cesareo,Matteo,5.0,30.0,1,
+42,San Cesareo,Matteo,5.5,30.0,0,
+43,San Cesareo,Matteo,6.0,29.5,1,
+44,San Cesareo,Matteo,6.7,29.5,0,
+45,San Cesareo,Matteo,26.0,23.0,0,
+46,San Cesareo,Matteo,10.0,36.0,0,
+0,Cinecittà,Matteo,6.0,24.0,1,0.0
+1,Cinecittà,Matteo,7.0,23.0,1,1.0
+2,Cinecittà,Matteo,8.0,23.0,1,2.0
+3,Cinecittà,Matteo,6.0,24.0,0,3.0
+4,Cinecittà,Matteo,7.0,24.0,0,4.0
+5,Cinecittà,Matteo,8.0,35.0,0,5.0
+6,Cinecittà,Matteo,35.0,27.0,0,6.0
+7,Cinecittà,Alessio,5.0,23.0,1,7.0
+8,Cinecittà,Alessio,5.0,27.0,1,8.0
+9,Cinecittà,Alessio,6.0,23.5,0,9.0
+10,Cinecittà,Alessio,6.0,27.0,0,10.0
+11,Cinecittà,Alessio,22.0,25.0,0,11.0
+12,Cinecittà,Alessio,30.0,32.0,0,12.0
+13,Cinecittà,Alessio,28.0,43.0,1,13.0
+14,Cinecittà,Peppe,7.0,1.0,0,14.0
+15,Cinecittà,Peppe,8.0,1.0,0,15.0
+16,Cinecittà,Peppe,6.0,22.0,1,16.0
+17,Cinecittà,Peppe,7.0,25.0,0,17.0
+18,Cinecittà,Peppe,6.0,25.5,0,18.0
+19,Cinecittà,Peppe,6.3,26.3,0,19.0
+20,Cinecittà,Peppe,6.3,27.0,1,20.0
+21,Cinecittà,Peppe,22.0,10.0,1,21.0
+22,Cinecittà,Peppe,28.0,24.0,1,22.0
+23,Cinecittà,Peppe,29.0,36.0,1,23.0
+24,Cinecittà,Peppe,15.0,32.0,1,24.0
+25,Cinecittà,Gughi,8.0,4.0,0,25.0
+26,Cinecittà,Gughi,7.0,26.0,1,26.0
+27,Cinecittà,Gughi,6.0,26.0,1,27.0
+28,Cinecittà,Gughi,6.5,26.5,1,28.0
+29,Cinecittà,Gughi,5.8,27.0,1,29.0
+30,Cinecittà,Mario,6.0,26.0,0,30.0
+31,Cinecittà,Mario,5.5,26.5,0,31.0
+32,Cinecittà,Mario,5.0,49.5,0,32.0
+33,Cinecittà,Mario,8.0,49.5,1,33.0
+34,Cinecittà,Leo,21.0,6.0,1,34.0
+35,Cinecittà,Leo,27.0,11.0,1,35.0
+36,Cinecittà,Leo,22.0,17.0,0,36.0
+37,Cinecittà,Leo,7.0,27.0,1,37.0
+38,Cinecittà,Leo,7.0,28.5,0,38.0
+39,Cinecittà,Leo,16.0,28.8,0,39.0
+40,Cinecittà,Leo,27.0,40.0,0,40.0
+41,Cinecittà,Robbi,20.0,8.0,0,41.0
+42,Cinecittà,Robbi,7.0,23.0,1,42.0
+43,Cinecittà,Robbi,7.0,27.0,1,43.0
+44,Cinecittà,Robbi,8.0,49.5,0,44.0
+45,Cinecittà,Fala,24.0,25.0,0,45.0
+46,Cinecittà,Fala,19.0,25.0,0,46.0
+47,Cinecittà,Fala,10.0,22.0,1,47.0
+48,Cinecittà,Fala,8.0,26.0,1,48.0
+49,Cinecittà,Fala,11.0,26.5,1,49.0
+50,Cinecittà,Fala,10.0,27.0,0,50.0
+51,Cinecittà,Marco,3.0,1.0,0,51.0
+52,Cinecittà,Marco,28.0,38.0,0,52.0
+53,Cinecittà,Marco,24.0,43.0,1,53.0
+54,Cinecittà,Marco,5.0,23.0,1,54.0
+55,Cinecittà,Marco,6.0,22.8,1,55.0
+56,Cinecittà,Marco,6.2,22.8,1,56.0
+57,Cinecittà,Marco,7.0,26.0,1,57.0
+58,Cinecittà,Marco,7.5,28.0,1,58.0
+59,Cinecittà,Greg,10.0,35.0,0,59.0
