@@ -82,6 +82,5 @@ def update_table(squadra):
     data = df_filtered.to_dict('records')
     return data
 
-if __name__ == '__main__':
-    app.layout = layout
-    app.run_server(debug=True, port=8050)
+app.layout = layout
+app.run_server(debug=True, port=8050)
