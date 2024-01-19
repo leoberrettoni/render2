@@ -164,9 +164,8 @@ def update_graph(giocatore, partita):
 #     app.run_server(debug=True)
 
 
-if __name__ == '__main__':
-    app.layout = layout
-    # Run on a different port if 8050 is already in use
-    app.run_server(debug=True, port=8050)
+app.layout = layout
+# Run on a different port if 8050 is already in use
+app.run_server(debug=True, port=8050)
 
 
