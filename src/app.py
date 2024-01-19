@@ -5,7 +5,7 @@ import dash_bootstrap_components as dbc
 import matplotlib.pyplot as plt
 from dash import dash_table
 
-df=pd.read_excel('/Users/leo/Documents/Scouting/Real/dati/Live.xlsx')
+df=pd.read_excel('Live.xlsx')
 df['Azione']=df['Azione'].replace('pr','Pick and Roll')
 df['Azione']=df['Azione'].replace('pen','Penetrazione')
 df['Azione']=df['Azione'].replace('us','Uscite')
