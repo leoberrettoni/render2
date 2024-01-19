@@ -3,3 +3,4 @@ pandas==1.4.3
 gunicorn
 dash-tools
 matplotlib
+openpyxl
