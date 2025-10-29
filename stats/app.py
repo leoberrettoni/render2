@@ -7,6 +7,7 @@ page_order = ['/', '/page-1', '/page-2', '/page-3']#, '/page-4', '/page-5']
 
 # starting the dash application
 app = dash.Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.SPACELAB])
+server = app.server
 
 # setting the sidebar
 sidebar = html.Div(
@@ -58,7 +59,7 @@ app.layout = dbc.Container([
 
 # letting the app run
 if __name__ == "__main__":
-    app.run(debug=False)
+    app.run_server(debug=False)
     
     
     
