@@ -18,7 +18,13 @@ import pandas as pd
 # connecting the page to the app.py file
 dash.register_page(__name__, path='/page-1', name='Statistiche per partita')
 
-df_luiss_giocatori=pd.read_csv("/Users/leo/Desktop/me 2/Scouting/Scouting_2025-2026/Test/tables/df_players_luiss.csv", sep=';')
+ROOT = Path(__file__).resolve().parents[1]   # da pages/ risale alla cartella principale
+
+# Percorso alla cartella data
+DATA = ROOT / "data"
+df_luiss_giocatori = pd.read_csv(DATA / "df_players_luiss.csv", sep=';')
+
+#df_luiss_giocatori=pd.read_csv("/Users/leo/Desktop/me 2/Scouting/Scouting_2025-2026/Test/tables/df_players_luiss.csv", sep=';')
 
 
 #app = dash.Dash(__name__, external_stylesheets=[dbc.themes.SPACELAB])
