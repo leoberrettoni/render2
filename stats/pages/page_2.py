@@ -8,10 +8,16 @@ import pandas as pd
 dash.register_page(__name__, path='/page-2', name='Statistiche tiro giocatore')
 
 # === Dataset ===
-df_luiss_giocatori = pd.read_csv(
+'''df_luiss_giocatori = pd.read_csv(
     "/Users/leo/Desktop/me 2/Scouting/Scouting_2025-2026/Test/tables/df_players_luiss.csv",
     sep=';'
-)
+)'''
+ROOT = Path(__file__).resolve().parents[1]   # da pages/ risale alla cartella principale
+
+# Percorso alla cartella data
+DATA = ROOT / "data"
+df_luiss_giocatori = pd.read_csv(DATA / "df_players_luiss.csv", sep=';')
+
 
 # === Componenti ===
 giocatori = dcc.Dropdown(
