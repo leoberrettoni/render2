@@ -14,6 +14,7 @@ import plotly.graph_objs as go
 import plotly.express as px
 from dash import dash_table
 import pandas as pd
+from pathlib import Path
 
 # connecting the page to the app.py file
 dash.register_page(__name__, path='/page-1', name='Statistiche per partita')
