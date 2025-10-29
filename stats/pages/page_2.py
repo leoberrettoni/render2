@@ -3,6 +3,7 @@ from dash import dcc, html, Input, Output, callback
 import dash_bootstrap_components as dbc
 import plotly.graph_objects as go
 import pandas as pd
+from pathlib import Path
 
 # ✅ registra la pagina (obbligatorio per multipage)
 dash.register_page(__name__, path='/page-2', name='Statistiche tiro giocatore')
