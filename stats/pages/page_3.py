@@ -5,14 +5,24 @@ import plotly.graph_objs as go
 import plotly.express as px
 from dash import dash_table
 import pandas as pd
+from pathlib import Path
 
 # ✅ registra la pagina (obbligatorio per multipage)
 dash.register_page(__name__, path='/page-3', name='Pagina Difesa')
 
 
 # importing the DF
-df_match_opponents=pd.read_csv("/Users/leo/Desktop/me 2/Scouting/Scouting_2025-2026/Test/tables/df_match_opponent.csv", sep=';')
-df_opponents=pd.read_csv("/Users/leo/Desktop/me 2/Scouting/Scouting_2025-2026/Test/tables/df_opponents.csv", sep=';')
+ROOT = Path(__file__).resolve().parents[1]   # da pages/ risale alla cartella principale
+
+# Percorso alla cartella data
+DATA = ROOT / "data"
+
+# Leggi i CSV
+df_match_opponents = pd.read_csv(DATA / "df_match_opponent.csv", sep=';')
+df_opponents = pd.read_csv(DATA / "df_opponents.csv", sep=';')
+
+#df_match_opponents=pd.read_csv("/Users/leo/Desktop/me 2/Scouting/Scouting_2025-2026/Test/tables/df_match_opponent.csv", sep=';')
+#df_opponents=pd.read_csv("/Users/leo/Desktop/me 2/Scouting/Scouting_2025-2026/Test/tables/df_opponents.csv", sep=';')
 df_opponents_merged = df_opponents.merge(df_match_opponents, on=['OPPONENT', 'DATA'], suffixes=('_opponent', '_match'), how='left')
 
 # dropping cols
