@@ -19,8 +19,10 @@ current_dir = Path(__file__).resolve().parent
 # Cartella padre
 parent_dir = current_dir.parent
 
+DATA = parent_dir / "data"
+
 # Nome del file immagine nella cartella padre
-image_name = "logo_luiss.jpg"
+image_name = DATA / "logo_luiss.jpg"
 
 # Path completo dell'immagine
 image_path = parent_dir / image_name
