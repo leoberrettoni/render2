@@ -7,26 +7,34 @@ Created on Thu May  4 19:28:09 2023
 """
 
 import dash
-import dash_html_components as html
+from dash import html
 import dash_bootstrap_components as dbc
 from pathlib import Path
+import base64
 
 dash.register_page(__name__, path='/', name='Home')
 
-# Percorso assoluto della cartella dove si trova QUESTO script
+# === costruisco il path reale del file immagine ===
+# cartella dove sta QUESTO file (es. .../pages)
 current_dir = Path(__file__).resolve().parent
 
-# Cartella padre
+# cartella padre (es. .../ , la root del progetto)
 parent_dir = current_dir.parent
 
-DATA = parent_dir / "data"
+# cartella data nella root
+data_dir = parent_dir / "data"
 
-# Nome del file immagine nella cartella padre
-image_name = DATA / "logo_luiss.jpg"
+#data_dir = parent_dir
 
-# Path completo dell'immagine
-image_path = parent_dir / image_name
+# file immagine dentro data
+image_file = data_dir / "logo_luiss.jpg"
 
+# leggo e converto in base64
+encoded_image = base64.b64encode(open(image_file, "rb").read()).decode()
+
+# costruisco la stringa da dare a <img src="...">
+image_src = f"data:image/jpeg;base64,{encoded_image}"
+# se il logo è png cambia in image/png
 
 layout = html.Div([
     dbc.Row([
@@ -43,12 +51,12 @@ layout = html.Div([
             ])
         ], justify='center'),
 
-        # 👉 QUI L'IMMAGINE
+        # IMMAGINE
         html.Div(
             html.Img(
-                src=image_path,           # <--- il file che hai messo in assets/
+                src=image_src,           # <-- ora è una data URI, niente URL esterno
                 style={
-                    'width': '400px',             # ridimensiona come vuoi
+                    'width': '400px',
                     'height': 'auto',
                     'display': 'block',
                     'margin-left': 'auto',
@@ -57,12 +65,12 @@ layout = html.Div([
             )
         ),
 
-        # 👉 QUI IL TESTO SOTTO L'IMMAGINE
+        # TESTO
         html.P(
             'Hi, we are three students attending the Data Visualization course, '
             'we are old fans of the yu-gi-oh game. With this web site we would '
             'like to help new players that like this game (as we did) to build the deck they '
-            'most prefered based on the data we have gathered. What the user of '
+            'most preferred based on the data we have gathered. What the user of '
             'this page will find will be some static graphs showing the type of data '
             'that have been used and then some interactive graphs that will be useful '
             'in the construction of the deck.'
