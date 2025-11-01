@@ -19,7 +19,7 @@ sidebar = html.Div(
         dbc.Nav(
             [ # connecting the app.py file to all the other files
               # that we want in the sidebar
-                dbc.NavLink("Home", href="/", active="exact"),
+                #dbc.NavLink("Home", href="/", active="exact"),
                 dbc.NavLink("Statistiche per partita", href="/page-1", active="exact"),
                 dbc.NavLink("Statistiche di tiro", href="/page-2", active="exact"),
                 dbc.NavLink("Pagina Difesa", href="/page-3", active="exact")
