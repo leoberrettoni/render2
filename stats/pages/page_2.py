@@ -93,7 +93,7 @@ def update_radar(giocatori_sel, ha_sel, wl_sel):
     campi_gruppo1 = ['2PA_tot', '2PM_tot', '3PM_tot', '3PA_tot', 'FTM_tot', 'FTA_tot']
     campi_gruppo2 = ['2P%_tot', '3P%_tot', 'FT%_tot']
 
-    dff = df_luiss_giocatori[
+    '''dff = df_luiss_giocatori[
         (df_luiss_giocatori['Player'].isin(giocatori_sel)) &
         (df_luiss_giocatori['HA'].isin(ha_sel)) &
         (df_luiss_giocatori['WL'].isin(wl_sel))
@@ -108,8 +108,35 @@ def update_radar(giocatori_sel, ha_sel, wl_sel):
     dff_filtered['FTM_tot'] = dff.groupby(['Player', 'HA', 'WL'])['FTM'].transform('sum')
     dff_filtered['2P%_tot'] = dff_filtered.apply(lambda row: (row['2PM_tot'] / row['2PA_tot'] * 100) if row['2PA_tot'] > 0 else 0, axis=1)
     dff_filtered['3P%_tot'] = dff_filtered.apply(lambda row: (row['3PM_tot'] / row['3PA_tot'] * 100) if row['3PA_tot'] > 0 else 0, axis=1)
-    dff_filtered['FT%_tot'] = dff_filtered.apply(lambda row: (row['FTM_tot'] / row['FTA_tot'] * 100) if row['FTA_tot'] > 0 else 0, axis=1)
+    dff_filtered['FT%_tot'] = dff_filtered.apply(lambda row: (row['FTM_tot'] / row['FTA_tot'] * 100) if row['FTA_tot'] > 0 else 0, axis=1)'''
 
+
+    dff = df_luiss_giocatori[
+        (df_luiss_giocatori['Player'].isin(giocatori_sel)) &
+        (df_luiss_giocatori['HA'].isin(ha_sel)) &
+        (df_luiss_giocatori['WL'].isin(wl_sel))
+    ].copy()
+    
+    # build group columns in modo dinamico
+    group_cols = ['Player']
+    if len(set(ha_sel)) == 1:
+        group_cols.append('HA')
+    if len(set(wl_sel)) == 1:
+        group_cols.append('WL')
+    
+    g = dff.groupby(group_cols, dropna=False)
+    
+    for stat in ['2PA','2PM','3PA','3PM','FTA','FTM']:
+        dff[f'{stat}_tot'] = g[stat].transform('sum')
+    
+    # percentuali vettorizzate (niente apply, niente divisioni per 0)
+    dff['2P%_tot'] = (dff['2PM_tot'] / dff['2PA_tot'].replace(0, pd.NA) * 100).fillna(0)
+    dff['3P%_tot'] = (dff['3PM_tot'] / dff['3PA_tot'].replace(0, pd.NA) * 100).fillna(0)
+    dff['FT%_tot'] = (dff['FTM_tot'] / dff['FTA_tot'].replace(0, pd.NA) * 100).fillna(0)
+    
+    dff_filtered = dff  # se ti serve mantenere lo stesso nome
+
+    
     fig1, fig2 = go.Figure(), go.Figure()
 
     for player in giocatori_sel:
