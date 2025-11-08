@@ -67,21 +67,23 @@ layout = html.Div([
 
         # TESTO
         html.P(
-            'Hi, and welcome to this basketball stats analysis page!!!
+                """Hi, and welcome to this basketball stats analysis page!!!
             Here you will be able to find some stats of the Luiss Serie D team, attending the DR! Championship; the analysis is based on performances
-            of the team both offensively and defensilvely. Thre will be sections showing stats by player and sections showing stats by team.
-            Any reccomandations on any analysis to show will be very apprecciated.
-            Do not esistate to contact me'
-        )
+            of the team both offensively and defensively. There will be sections showing stats by player and sections showing stats by team.
+            Any recommendations on analyses to show will be very appreciated.
+            Do not hesitate to contact me.""",
+                style={'whiteSpace': 'pre-wrap'}
+            )
     ]),
 
     html.Div([
         html.H3('Our Data'),
         html.P(
-            'Our data is recorded using the Basketball Stats assistant app during each mach of the championshp.
-            During each game someone of the team (mostly the TM) takes stats about Luiss players, luiss team and opponent Team; 
-            they are then uploaded into speciic table through a data engineering python process and showed in dashboards using Dash'
-        )
+                """Our data is recorded using the Basketball Stats Assistant app during each match of the championship.
+            During each game someone on the team (mostly the TM) takes stats about LUISS players, LUISS team and the opponent team;
+            they are then uploaded into specific tables through a data engineering Python process and shown in dashboards using Dash.""",
+                style={'whiteSpace': 'pre-wrap'}
+            )
     ]),
 
     dbc.Row([
