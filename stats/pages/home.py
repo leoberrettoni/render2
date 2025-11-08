@@ -67,28 +67,20 @@ layout = html.Div([
 
         # TESTO
         html.P(
-            'Hi, we are three students attending the Data Visualization course, '
-            'we are old fans of the yu-gi-oh game. With this web site we would '
-            'like to help new players that like this game (as we did) to build the deck they '
-            'most preferred based on the data we have gathered. What the user of '
-            'this page will find will be some static graphs showing the type of data '
-            'that have been used and then some interactive graphs that will be useful '
-            'in the construction of the deck.'
+            'Hi, and welcome to this basketball stats analysis page!!!'
+            'Here you will be able to find some stats of the Luiss Serie D team, attending the DR! Championship; the analysis is based on performances
+            of the team both offensively and defensilvely. Thre will be sections showing stats by player and sections showing stats by team.
+            Any reccomandations on any analysis to show will be very apprecciated.
+            Do not esistate to contact me'
         )
     ]),
 
     html.Div([
         html.H3('Our Data'),
         html.P(
-            'In order to build this web site we retrieved our data from an '
-            'API about Yu-Gi-Oh cards. Inside that dataset there were quite '
-            'a lot of data and after having cleaned them a bit we decided to '
-            'construct a dataset with the most useful data to solve '
-            'our task. Therefore, the data we will be using all along the '
-            'journey in the site are data about the card name, their type, '
-            'the attribute of the monster cards, their attack, defense and '
-            'level, the price of the cards and the names of the sets in '
-            'which they are used and the rarity of the sets.'
+            'Our data is recorded using the Basketball Stats assistant app during each mach of the championshp.'
+            'During each game someone of the team (mostly the TM) takes stats about Luiss players, luiss team and opponent Team; 
+            they are then uploaded into speciic table through a data engineering python process and showed in dashboards using Dash'
         )
     ]),
 
