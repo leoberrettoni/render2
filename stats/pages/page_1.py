@@ -7,6 +7,15 @@ esegui lo script python3 grafici.py e poi vai su http://127.0.0.1:8052/
 
 
 
+'''
+esegui lo script python3 grafici.py e poi vai su http://127.0.0.1:8052/
+'''
+
+
+
+
+
+
 import dash
 from dash import dcc, html, Input, Output, callback
 import dash_bootstrap_components as dbc
@@ -14,18 +23,11 @@ import plotly.graph_objs as go
 import plotly.express as px
 from dash import dash_table
 import pandas as pd
-from pathlib import Path
 
 # connecting the page to the app.py file
 dash.register_page(__name__, path='/page-1', name='Statistiche per partita')
 
-ROOT = Path(__file__).resolve().parents[1]   # da pages/ risale alla cartella principale
-
-# Percorso alla cartella data
-DATA = ROOT / "data"
-df_luiss_giocatori = pd.read_csv(DATA / "df_players_luiss.csv", sep=';')
-
-#df_luiss_giocatori=pd.read_csv("/Users/leo/Desktop/me 2/Scouting/Scouting_2025-2026/Test/tables/df_players_luiss.csv", sep=';')
+df_luiss_giocatori=pd.read_csv("/Users/leo/Desktop/me 2/Scouting/Scouting_2025-2026/Test/tables/df_players_luiss.csv", sep=';')
 
 
 #app = dash.Dash(__name__, external_stylesheets=[dbc.themes.SPACELAB])
@@ -65,20 +67,20 @@ win_lose=dcc.Checklist(
 radio_item_statistica=dcc.RadioItems(
         id='radio-items statistiche',
         options=[
-            {'label': 'FGA2', 'value': '2PA_tot'},
-            {'label': 'FGM2', 'value': '2PM_tot'},
-            {'label': '2P%', 'value': '2P%_tot'},
-            {'label': 'FGM3', 'value': '3PM_tot'},
-            {'label': 'FGA3', 'value': '3PA_tot'},
-            {'label': '3P%', 'value': '3P%_tot'},
-            {'label': 'FTM', 'value': 'FTM_tot'},
-            {'label': 'FTA', 'value': 'FTA_tot'},
-            {'label': 'FT%', 'value': 'FT%_tot'},
-            {'label': 'REB', 'value': 'REB_tot'},
-            {'label': 'AST', 'value': 'AST_tot'},
-            {'label': 'TOV', 'value': 'TOV_tot'},
-            {'label': 'STL', 'value': 'STL_tot'},
-            {'label': 'PTS', 'value': 'PTS_tot'}
+            {'label': 'FGA2', 'value': '2PA'},
+            {'label': 'FGM2', 'value': '2PM'},
+            {'label': '2P%', 'value': '2P%'},
+            {'label': 'FGM3', 'value': '3PM'},
+            {'label': 'FGA3', 'value': '3PA'},
+            {'label': '3P%', 'value': '3P%'},
+            {'label': 'FTM', 'value': 'FTM'},
+            {'label': 'FTA', 'value': 'FTA'},
+            {'label': 'FT%', 'value': 'FT%'},
+            {'label': 'REB', 'value': 'REB'},
+            {'label': 'AST', 'value': 'AST'},
+            {'label': 'TOV', 'value': 'TOV'},
+            {'label': 'STL', 'value': 'STL'},
+            {'label': 'PTS', 'value': 'PTS'}
         ],
         value='2PA',  # Valore di default
         labelStyle={'display': 'block'}  # Mostra le opzioni come lista verticale
@@ -137,27 +139,9 @@ layout = dbc.Container([
 
 def update_graph(home_away, win_lose, giocatore, statistica):
 
-    df_luiss_giocatori_copy = df_luiss_giocatori.copy()
-    df_luiss_giocatori_copy['2PA_tot'] = df_luiss_giocatori_copy.groupby(['Player', 'HA', 'WL'])['2PA'].transform('sum')
-    df_luiss_giocatori_copy['2PM_tot'] = df_luiss_giocatori_copy.groupby(['Player', 'HA', 'WL'])['2PM'].transform('sum')
-    df_luiss_giocatori_copy['3PA_tot'] = df_luiss_giocatori_copy.groupby(['Player', 'HA', 'WL'])['3PA'].transform('sum')
-    df_luiss_giocatori_copy['3PM_tot'] = df_luiss_giocatori_copy.groupby(['Player', 'HA', 'WL'])['3PM'].transform('sum')
-    df_luiss_giocatori_copy['FTA_tot'] = df_luiss_giocatori_copy.groupby(['Player', 'HA', 'WL'])['FTA'].transform('sum')
-    df_luiss_giocatori_copy['FTM_tot'] = df_luiss_giocatori_copy.groupby(['Player', 'HA', 'WL'])['FTM'].transform('sum')
-    df_luiss_giocatori_copy['2P%_tot'] = df_luiss_giocatori_copy.apply(lambda row: (row['2PM_tot'] / row['2PA_tot'] * 100) if row['2PA_tot'] > 0 else 0, axis=1)
-    df_luiss_giocatori_copy['3P%_tot'] = df_luiss_giocatori_copy.apply(lambda row: (row['3PM_tot'] / row['3PA_tot'] * 100) if row['3PA_tot'] > 0 else 0, axis=1)
-    df_luiss_giocatori_copy['FT%_tot'] = df_luiss_giocatori_copy.apply(lambda row: (row['FTM_tot'] / row['FTA_tot'] * 100) if row['FTA_tot'] > 0 else 0, axis=1)
-    df_luiss_giocatori_copy['AST_tot'] = df_luiss_giocatori_copy.groupby(['Player', 'HA', 'WL'])['AST'].transform('sum')
-    df_luiss_giocatori_copy['TOV_tot'] = df_luiss_giocatori_copy.groupby(['Player', 'HA', 'WL'])['TOV'].transform('sum')
-    df_luiss_giocatori_copy['STL_tot'] = df_luiss_giocatori_copy.groupby(['Player', 'HA', 'WL'])['STL'].transform('sum')
-    df_luiss_giocatori_copy['PTS_tot'] = df_luiss_giocatori_copy.groupby(['Player', 'HA', 'WL'])['PTS'].transform('sum')
-    df_luiss_giocatori_copy['REB_tot'] = df_luiss_giocatori_copy.groupby(['Player', 'HA', 'WL'])['REB'].transform('sum')
-
-
-
     # Filter the dataframe according to user input
-    filtered_df = df_luiss_giocatori[(df_luiss_giocatori_copy['Player'].isin(giocatore)) & (df_luiss_giocatori_copy['HA'].isin(home_away))
-                                     & (df_luiss_giocatori_copy['WL'].isin(win_lose))]
+    filtered_df = df_luiss_giocatori[(df_luiss_giocatori['Player'].isin(giocatore)) & (df_luiss_giocatori['HA'].isin(home_away))
+                                     & (df_luiss_giocatori['WL'].isin(win_lose))]
     
     # creating the plot
     fig = px.bar(
@@ -179,8 +163,5 @@ def update_graph(home_away, win_lose, giocatore, statistica):
     return fig
 
 
-'''if __name__ == '__main__':
-    app.layout = layout
-    # Run on a different port if 8050 is already in use
-    #app.run_server(debug=True, port=8050, host='0.0.0.0')
-    app.run_server(debug=True, port=8052)'''
+
+
