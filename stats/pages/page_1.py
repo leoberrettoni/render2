@@ -2,6 +2,10 @@ import plotly.express as px
 from dash import dash_table
 import pandas as pd
 from pathlib import Path
+import dash
+from dash import dcc, html, Input, Output, callback
+import dash_bootstrap_components as dbc
+import plotly.graph_objects as go
 
 # connecting the page to the app.py file
 dash.register_page(__name__, path='/page-1', name='Statistiche per partita')
