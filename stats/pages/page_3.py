@@ -34,7 +34,24 @@ df_opponents_merged = df_opponents_merged.drop(columns=['WL_opponent', 'HA_oppon
 #server = app.server
 
 mytitle = dcc.Markdown(children='')
-mygraph = dcc.Graph(id='mygraph', figure={})
+#mygraph = dcc.Graph(id='mygraph', figure={})
+mygraph = dcc.Graph(
+    id='mygraph',
+    figure={},
+    config={
+        "displayModeBar": True,      # mantiene la toolbar
+        "responsive": False,         # 🔥 disattiva resize automatico
+        "staticPlot": False
+    },
+    style={
+        "height": "480px",           # 🔥 fissa l’altezza del container
+        "width": "100%",             # usa tutta la larghezza disponibile
+        "overflow": "hidden"         # evita overflow progressivo
+    },
+    clear_on_unhover=True,           # 🔥 evita accumulo interno di hover data
+    className="graph-fixed"
+)
+
 
 # Setting the dropdown menu
 home_away=dcc.Checklist(
