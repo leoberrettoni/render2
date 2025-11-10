@@ -370,6 +370,14 @@ def update_graph(home_away, win_lose, statistica):
                      title=f"{statistica} per avversario", 
                      height=350,
                      template='plotly_white')
+        fig.update_layout(
+                    height=450,                # fissa l’altezza del grafico
+                    autosize=False,            # disabilita l’adattamento dinamico
+                    margin=dict(t=50, b=50, l=50, r=50),
+                    plot_bgcolor="rgba(245,245,245,1)",
+                    paper_bgcolor="white",
+                    transition=dict(duration=0)  # evita animazioni “crescenti”
+                )
 
     print("=== Callback completed ===")
     return data_ha, columns_ha, data_wl, columns_wl, fig, data_ha_2, columns_ha_2, data_wl_2, columns_wl_2
