@@ -369,6 +369,7 @@ def update_graph(home_away, win_lose, statistica):
                      pattern_shape='HA_match',      # Pattern o texture per casa/trasferta
                      title=f"{statistica} per avversario", 
                      height=350,
+                     autosize=False,
                      template='plotly_white')
         fig.update_layout(
                     height=450,                # fissa l’altezza del grafico
