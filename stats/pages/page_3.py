@@ -356,31 +356,52 @@ def update_graph(home_away, win_lose, statistica):
 
 
     # --- Graph ---
-    if df_filtered.empty:
-        fig = go.Figure()
-        fig.update_layout(title="⚠️ Nessun dato disponibile per i filtri selezionati")
-    else:
-        if statistica not in df_filtered.columns:
-            if f"{statistica}_match" in df_filtered.columns:
-                statistica = f"{statistica}_match"
-        fig = px.bar(df_filtered, x='OPPONENT', 
-                     y=statistica, 
-                     color='WL_match',              # Colore per vittoria/sconfitta
-                     pattern_shape='HA_match',      # Pattern o texture per casa/trasferta
-                     title=f"{statistica} per avversario", 
-                     height=350,
-                     autosize=False,
-                     template='plotly_white')
-        fig.update_layout(
-                    height=450,                # fissa l’altezza del grafico
-                    autosize=False,            # disabilita l’adattamento dinamico
-                    margin=dict(t=50, b=50, l=50, r=50),
-                    plot_bgcolor="rgba(245,245,245,1)",
-                    paper_bgcolor="white",
-                    transition=dict(duration=0)  # evita animazioni “crescenti”
-                )
+if df_filtered.empty:
+    fig = go.Figure()
+    fig.update_layout(
+        title="⚠️ Nessun dato disponibile per i filtri selezionati",
+        height=400,
+        autosize=False,
+        margin=dict(t=50, b=50, l=50, r=50)
+    )
+else:
+    if statistica not in df_filtered.columns:
+        if f"{statistica}_match" in df_filtered.columns:
+            statistica = f"{statistica}_match"
 
-    print("=== Callback completed ===")
-    return data_ha, columns_ha, data_wl, columns_wl, fig, data_ha_2, columns_ha_2, data_wl_2, columns_wl_2
+    # ✅ Ricrea figura da zero (non cumulativa)
+    fig = go.Figure()
+
+    # Aggiungi le barre manualmente — evita duplicazioni di px.bar()
+    for wl in df_filtered["WL_match"].unique():
+        for ha in df_filtered["HA_match"].unique():
+            subset = df_filtered[(df_filtered["WL_match"] == wl) & (df_filtered["HA_match"] == ha)]
+            fig.add_trace(go.Bar(
+                x=subset["OPPONENT"],
+                y=subset[statistica],
+                name=f"{wl} ({ha})",
+                marker=dict(
+                    color="green" if wl == "W" else "red",
+                    line=dict(width=1, color="black")
+                ),
+                opacity=0.85
+            ))
+
+    # Layout pulito, fisso e coerente
+    fig.update_layout(
+        title=f"{statistica} per avversario",
+        barmode="group",
+        height=450,              # dimensione fissa
+        autosize=False,          # 🔥 evita crescita
+        margin=dict(t=60, b=60, l=60, r=60),
+        plot_bgcolor="rgba(245,245,245,1)",
+        paper_bgcolor="white",
+        transition=dict(duration=0),  # disabilita animazioni
+        xaxis=dict(fixedrange=True),  # evita zoom/rescale automatico
+        yaxis=dict(fixedrange=True)
+    )
+
+print("=== Callback completed ===")
+return data_ha, columns_ha, data_wl, columns_wl, fig, data_ha_2, columns_ha_2, data_wl_2, columns_wl_2
 
 
