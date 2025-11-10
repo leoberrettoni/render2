@@ -417,7 +417,7 @@ def update_graph(home_away, win_lose, statistica):
                     ))
 
         # ✅ Ordina X in base alla DATA
-        fig.update_xaxes(categoryorder="array", categoryarray=df_filtered["OPPONENT"].unique())
+        #fig.update_xaxes(categoryorder="array", categoryarray=df_filtered["OPPONENT"].unique())
         
         # ✅ layout fisso, nessun autosize o resize cumulativo
         fig.update_layout(
