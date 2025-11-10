@@ -171,6 +171,114 @@ layout = dbc.Container([
 
 
 
+
+# Defining the tables to be plotted in the callback
+# Setting the exclude stats
+exclude_stats_ha = ["Best Partial", "OPPONENT", "WL", "SEASON_LEVEL", "DATA", "Squadra", "Bench Points", "Starter Points"]
+exclude_stats_wl = ["Best Partial", "OPPONENT", "HA", "SEASON_LEVEL", "DATA", "Squadra", "Bench Points", "Starter Points"]
+exclude_stats_ha_2 = ['No', 'Player', 'MIN',  'FG%', '3P%',  '2P%', 'FT%',  'PIR', 'EFF','+/-', 'OPPONENT', 'WL', 'SEASON_LEVEL', 'DATA']
+exclude_stats_wl_2 = ['No', 'Player', 'MIN',  'FG%', '3P%',  '2P%', 'FT%',  'PIR', 'EFF','+/-', 'OPPONENT', 'HA', 'SEASON_LEVEL', 'DATA']
+
+# --- HA Table 1 ---
+df_match_opponents_melt_ha = df_match_opponents.melt(id_vars='HA', var_name='Statistica', value_name='Valore')
+# grouping the melted df by HA and Statistica and summing Valore where the statistica is not Best Partial,OPPONENT,WL,SEASON_LEVEL,DATA
+df_match_opponents_grouped_ha = (
+    df_match_opponents_melt_ha
+    .loc[~df_match_opponents_melt_ha["Statistica"].isin(exclude_stats_ha)]
+    .groupby(["HA", "Statistica"], as_index=False)["Valore"]
+    .mean()
+    .round(2)
+)
+df_match_opponents_pivot_ha = df_match_opponents_grouped_ha.pivot(index='Statistica', columns='HA', values='Valore').reset_index()
+print("Pivot HA:", df_match_opponents_pivot_ha.shape)
+
+# --- WL Table 1 ---
+df_match_opponents_melt_wl = df_match_opponents.melt(id_vars='WL', var_name='Statistica', value_name='Valore')
+# grouping the melted df by HA and Statistica and summing Valore where the statistica is not Best Partial,OPPONENT,WL,SEASON_LEVEL,DATA
+df_match_opponents_grouped_wl = (
+    df_match_opponents_melt_wl
+    .loc[~df_match_opponents_melt_wl["Statistica"].isin(exclude_stats_wl)]
+    .groupby(["WL", "Statistica"], as_index=False)["Valore"]
+    .mean()
+    .round(2)
+)
+df_match_opponents_pivot_wl = df_match_opponents_grouped_wl.pivot(index='Statistica', columns='WL', values='Valore').reset_index()
+print("Pivot WL:", df_match_opponents_pivot_wl.shape)
+
+# --- HA Table 2 ---
+df_opponents_melt_ha = df_opponents.melt(id_vars='HA', var_name='Statistica', value_name='Valore')
+
+df_opponents_grouped_ha = (
+    df_opponents_melt_ha
+    .loc[~df_opponents_melt_ha["Statistica"].isin(exclude_stats_ha_2)]
+    .groupby(["HA", "Statistica"], as_index=False)["Valore"]
+    .mean()
+    .round(2)
+)
+
+# --- Calcolo percentuali 2P% e 3P% ---
+# Trasformiamo in wide format per accedere facilmente ai valori
+df_wide_ha = df_opponents_grouped_ha.pivot(index="HA", columns="Statistica", values="Valore")
+# Calcolo percentuali (evita divisione per 0)
+df_wide_ha["2P%"] = np.where(df_wide_ha["2PA"] > 0, df_wide_ha["2PM"] / df_wide_ha["2PA"] * 100, np.nan)
+df_wide_ha["3P%"] = np.where(df_wide_ha["3PA"] > 0, df_wide_ha["3PM"] / df_wide_ha["3PA"] * 100, np.nan)
+df_wide_ha["FT%"] = np.where(df_wide_ha["FTA"] > 0, df_wide_ha["FTM"] / df_wide_ha["FTA"] * 100, np.nan)
+
+# Arrotondiamo
+df_wide_ha[["2P%", "3P%", "FT%"]] = df_wide_ha[["2P%", "3P%", "FT%"]].round(2)
+
+# Torniamo in formato lungo per aggiungerle al grouped
+df_percentuali_ha = df_wide_ha[["2P%", "3P%", "FT%"]].reset_index().melt(
+    id_vars="HA",
+    var_name="Statistica",
+    value_name="Valore"
+)
+
+# --- Combiniamo ---
+df_opponents_grouped_ha = pd.concat([df_opponents_grouped_ha, df_percentuali_ha], ignore_index=True)
+
+# --- Pivot finale (se ti serve per la visualizzazione)
+df_opponents_pivot_ha = df_opponents_grouped_ha.pivot(index='Statistica', columns='HA', values='Valore').reset_index()
+
+print("Pivot HA:", df_opponents_pivot_ha.shape)
+
+
+# --- WL Table 2 ---
+df_opponents_melt_wl = df_opponents.melt(id_vars='WL', var_name='Statistica', value_name='Valore')
+df_opponents_grouped_wl = (
+    df_opponents_melt_wl
+    .loc[~df_opponents_melt_wl["Statistica"].isin(exclude_stats_wl_2)]
+    .groupby(["WL", "Statistica"], as_index=False)["Valore"]
+    .mean()
+    .round(2)
+)
+
+# --- Calcolo percentuali 2P% e 3P% ---
+# Trasformiamo in wide format per accedere facilmente ai valori
+df_wide_wl = df_opponents_grouped_wl.pivot(index="WL", columns="Statistica", values="Valore")
+# Calcolo percentuali (evita divisione per 0)
+df_wide_wl["2P%"] = np.where(df_wide_wl["2PA"] > 0, df_wide_wl["2PM"] / df_wide_wl["2PA"] * 100, np.nan)
+df_wide_wl["3P%"] = np.where(df_wide_wl["3PA"] > 0, df_wide_wl["3PM"] / df_wide_wl["3PA"] * 100, np.nan)
+df_wide_wl["FT%"] = np.where(df_wide_wl["FTA"] > 0, df_wide_wl["FTM"] / df_wide_wl["FTA"] * 100, np.nan)
+
+# Arrotondiamo
+df_wide_wl[["2P%", "3P%", "FT%"]] = df_wide_wl[["2P%", "3P%", "FT%"]].round(2)
+
+# Torniamo in formato lungo per aggiungerle al grouped
+df_percentuali_wl = df_wide_wl[["2P%", "3P%", "FT%"]].reset_index().melt(
+    id_vars="WL",
+    var_name="Statistica",
+    value_name="Valore"
+)
+
+# --- Combiniamo ---
+df_opponents_grouped_wl = pd.concat([df_opponents_grouped_wl, df_percentuali_wl], ignore_index=True)
+
+# --- Pivot finale (se ti serve per la visualizzazione)
+df_opponents_pivot_wl = df_opponents_grouped_wl.pivot(index='Statistica', columns='WL', values='Valore').reset_index()
+
+print("Pivot HA:", df_opponents_pivot_wl.shape)
+
 # Callbacks and function definitions
 
 @callback(
@@ -199,7 +307,7 @@ def update_graph(home_away, win_lose, statistica):
     if not win_lose:
         win_lose = ['W', 'L']
 
-    # --- HA Table 1 ---
+    '''# --- HA Table 1 ---
     df_match_opponents_melt_ha = df_match_opponents.melt(id_vars='HA', var_name='Statistica', value_name='Valore')
     df_match_opponents_pivot_ha = df_match_opponents_melt_ha.pivot(index='Statistica', columns='HA', values='Valore').reset_index()
     print("Pivot HA:", df_match_opponents_pivot_ha.shape)
@@ -218,6 +326,7 @@ def update_graph(home_away, win_lose, statistica):
     df_opponents_melt_wl = df_opponents.melt(id_vars='WL', var_name='Statistica', value_name='Valore')
     df_opponents_pivot_wl = df_opponents_melt_wl.pivot(index='Statistica', columns='WL', values='Valore').reset_index()
     print("Pivot WL:", df_opponents_pivot_wl.shape)
+    '''
 
     # --- Filter for graph ---
     df_filtered = df_opponents_merged[
@@ -229,14 +338,18 @@ def update_graph(home_away, win_lose, statistica):
 
     # --- Build DataTable data ---
     data_ha = df_match_opponents_pivot_ha.to_dict('records')
-    columns_ha = [{"name": i, "id": i} for i in df_match_opponents_pivot_ha.columns]
+    columns_ha = [{"name": i, "id": i, "type": "numeric", "format": Format(precision=2, scheme=Scheme.fixed)} 
+                  for i in df_match_opponents_pivot_ha.columns]
     data_wl = df_match_opponents_pivot_wl.to_dict('records')
-    columns_wl = [{"name": i, "id": i} for i in df_match_opponents_pivot_wl.columns]
+    columns_wl = [{"name": i, "id": i, "type": "numeric", "format": Format(precision=2, scheme=Scheme.fixed)} 
+                  for i in df_match_opponents_pivot_wl.columns]
 
     data_ha_2 = df_opponents_pivot_ha.to_dict('records')
-    columns_ha_2 = [{"name": i, "id": i} for i in df_opponents_pivot_ha.columns]
+    columns_ha_2 = [{"name": i, "id": i, "type": "numeric", "format": Format(precision=2, scheme=Scheme.fixed)} 
+                    for i in df_opponents_pivot_ha.columns]
     data_wl_2 = df_opponents_pivot_wl.to_dict('records')
-    columns_wl_2 = [{"name": i, "id": i} for i in df_opponents_pivot_wl.columns]
+    columns_wl_2 = [{"name": i, "id": i, "type": "numeric", "format": Format(precision=2, scheme=Scheme.fixed)} 
+                    for i in df_opponents_pivot_wl.columns]
 
 
 
@@ -252,6 +365,5 @@ def update_graph(home_away, win_lose, statistica):
 
     print("=== Callback completed ===")
     return data_ha, columns_ha, data_wl, columns_wl, fig, data_ha_2, columns_ha_2, data_wl_2, columns_wl_2
-
 
 
