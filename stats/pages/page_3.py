@@ -363,7 +363,11 @@ def update_graph(home_away, win_lose, statistica):
         if statistica not in df_filtered.columns:
             if f"{statistica}_match" in df_filtered.columns:
                 statistica = f"{statistica}_match"
-        fig = px.bar(df_filtered, x='OPPONENT', y=statistica, title=f"{statistica} per avversario", template='plotly_white')
+        fig = px.bar(df_filtered, x='OPPONENT', 
+                     y=statistica, 
+                     color='WL_match',              # Colore per vittoria/sconfitta
+                     pattern_shape='HA_match',      # Pattern o texture per casa/trasferta
+                     title=f"{statistica} per avversario", template='plotly_white')
 
     print("=== Callback completed ===")
     return data_ha, columns_ha, data_wl, columns_wl, fig, data_ha_2, columns_ha_2, data_wl_2, columns_wl_2
