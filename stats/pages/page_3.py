@@ -43,7 +43,7 @@ home_away=dcc.Checklist(
             {'label': 'Casa', 'value': 'H'},
             {'label': 'Trasferta', 'value': 'A'}
         ],
-        value=['C'],
+        value=['H'],
         labelStyle={'display': 'block'}
     )
 
