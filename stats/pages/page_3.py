@@ -352,6 +352,10 @@ def update_graph(home_away, win_lose, statistica):
         df_opponents_merged['HA_match'].isin(home_away) &
         df_opponents_merged['WL_match'].isin(win_lose)
     ]
+
+    # set order
+    df_filtered = df_filtered.sort_values("DATA")
+    
     print("Filtered rows:", len(df_filtered))
     print("Columns:", df_filtered.columns.tolist()[:10])
 
@@ -412,6 +416,9 @@ def update_graph(home_away, win_lose, statistica):
                         opacity=0.9
                     ))
 
+        # ✅ Ordina X in base alla DATA
+        fig.update_xaxes(categoryorder="array", categoryarray=df_filtered["OPPONENT"].unique())
+        
         # ✅ layout fisso, nessun autosize o resize cumulativo
         fig.update_layout(
             title=f"{statistica} per avversario",
