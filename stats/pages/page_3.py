@@ -6,6 +6,8 @@ import plotly.express as px
 from dash import dash_table
 import pandas as pd
 from pathlib import Path
+import numpy as np
+from dash.dash_table.Format import Format, Group, Scheme
 
 # ✅ registra la pagina (obbligatorio per multipage)
 dash.register_page(__name__, path='/page-3', name='Pagina Difesa')
