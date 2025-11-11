@@ -20,8 +20,8 @@ ROOT = Path(__file__).resolve().parents[1]   # da pages/ risale alla cartella pr
 DATA = ROOT / "data"
 
 # Importing the CSV
-df_match_opponents = pd.read_csv(DATA / "df_match_luiss.csv", sep=';')
-df_opponents = pd.read_csv(DATA / "df_teams_luiss.csv", sep=';')
+df_match_luiss = pd.read_csv(DATA / "df_match_luiss.csv", sep=';')
+df_luiss = pd.read_csv(DATA / "df_teams_luiss.csv", sep=';')
 
 
 # importing the DF
