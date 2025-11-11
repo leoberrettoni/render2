@@ -13,6 +13,13 @@ from dash.dash_table.Format import Format, Group, Scheme
 # ✅ registra la pagina (obbligatorio per multipage)
 dash.register_page(__name__, path='/page-4', name='Pagina Attacco Luiss')
 
+# importing the DF
+ROOT = Path(__file__).resolve().parents[1]   # da pages/ risale alla cartella principale
+
+# Percorso alla cartella data
+DATA = ROOT / "data"
+
+# Importing the CSV
 df_match_opponents = pd.read_csv(DATA / "df_match_luiss.csv", sep=';')
 df_opponents = pd.read_csv(DATA / "df_teams_luiss.csv", sep=';')
 
