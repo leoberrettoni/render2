@@ -22,8 +22,8 @@ sidebar = html.Div(
                 dbc.NavLink("Home", href="/", active="exact"),
                 dbc.NavLink("Statistiche per partita", href="/page-1", active="exact"),
                 dbc.NavLink("Statistiche di tiro", href="/page-2", active="exact"),
-                dbc.NavLink("Pagina Difesa", href="/page-3", active="exact")
-                dbc.NavLink("Pagina Attacco Luiss", href="/page-4", active="exact"),
+                dbc.NavLink("Pagina Difesa", href="/page-3", active="exact"),
+                dbc.NavLink("Pagina Attacco Luiss", href="/page-4", active="exact")
                 #dbc.NavLink("End Page", href="/page-5", active="exact"),
 
             ],
