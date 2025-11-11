@@ -3,7 +3,7 @@ from dash import html, dcc
 import dash_bootstrap_components as dbc
 
 # deciding the order of the pages in the sidebar
-page_order = ['/', '/page-1', '/page-2', '/page-3','/page-4',]#, '/page-4', '/page-5']
+page_order = ['/', '/page-1', '/page-2', '/page-3']#,'/page-4',]#, '/page-4', '/page-5']
 
 # starting the dash application
 app = dash.Dash(__name__, use_pages=True, external_stylesheets=[dbc.themes.SPACELAB])
@@ -22,8 +22,8 @@ sidebar = html.Div(
                 dbc.NavLink("Home", href="/", active="exact"),
                 dbc.NavLink("Statistiche per partita", href="/page-1", active="exact"),
                 dbc.NavLink("Statistiche di tiro", href="/page-2", active="exact"),
-                dbc.NavLink("Pagina Difesa", href="/page-3", active="exact"),
-                dbc.NavLink("Pagina Attacco Luiss", href="/page-4", active="exact")
+                dbc.NavLink("Pagina Difesa", href="/page-3", active="exact")
+                #dbc.NavLink("Pagina Attacco Luiss", href="/page-4", active="exact")
                 #dbc.NavLink("End Page", href="/page-5", active="exact"),
 
             ],
