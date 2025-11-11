@@ -13,10 +13,13 @@ from dash.dash_table.Format import Format, Group, Scheme
 # ✅ registra la pagina (obbligatorio per multipage)
 dash.register_page(__name__, path='/page-4', name='Pagina Attacco Luiss')
 
+df_match_opponents = pd.read_csv(DATA / "df_match_luiss.csv", sep=';')
+df_opponents = pd.read_csv(DATA / "df_teams_luiss.csv", sep=';')
+
 
 # importing the DF
-df_match_luiss=pd.read_csv("/Users/leo/Desktop/me 2/Scouting/Scouting_2025-2026/Test/tables/df_match_luiss.csv", sep=';')
-df_luiss=pd.read_csv("/Users/leo/Desktop/me 2/Scouting/Scouting_2025-2026/Test/tables/df_teams_luiss.csv", sep=';')
+#df_match_luiss=pd.read_csv("/Users/leo/Desktop/me 2/Scouting/Scouting_2025-2026/Test/tables/df_match_luiss.csv", sep=';')
+#df_luiss=pd.read_csv("/Users/leo/Desktop/me 2/Scouting/Scouting_2025-2026/Test/tables/df_teams_luiss.csv", sep=';')
 df_luiss_merged = df_luiss.merge(df_match_luiss, on=['OPPONENT', 'DATA'], suffixes=('_opponent', '_match'), how='left')
 
 # dropping cols
