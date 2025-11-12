@@ -13,20 +13,10 @@ from dash.dash_table.Format import Format, Group, Scheme
 # ✅ registra la pagina (obbligatorio per multipage)
 dash.register_page(__name__, path='/page-4', name='Pagina Attacco Luiss')
 
-# importing the DF
-ROOT = Path(__file__).resolve().parents[1]   # da pages/ risale alla cartella principale
-
-# Percorso alla cartella data
-DATA = ROOT / "data"
-
-# Importing the CSV
-df_match_luiss = pd.read_csv(DATA / "df_match_luiss.csv", sep=';')
-df_luiss = pd.read_csv(DATA / "df_teams_luiss.csv", sep=';')
-
 
 # importing the DF
-#df_match_luiss=pd.read_csv("/Users/leo/Desktop/me 2/Scouting/Scouting_2025-2026/Test/tables/df_match_luiss.csv", sep=';')
-#df_luiss=pd.read_csv("/Users/leo/Desktop/me 2/Scouting/Scouting_2025-2026/Test/tables/df_teams_luiss.csv", sep=';')
+df_match_luiss=pd.read_csv("/Users/leo/Desktop/me 2/Scouting/Scouting_2025-2026/Test/tables/df_match_luiss.csv", sep=';')
+df_luiss=pd.read_csv("/Users/leo/Desktop/me 2/Scouting/Scouting_2025-2026/Test/tables/df_teams_luiss.csv", sep=';')
 df_luiss_merged = df_luiss.merge(df_match_luiss, on=['OPPONENT', 'DATA'], suffixes=('_opponent', '_match'), how='left')
 
 # dropping cols
@@ -38,7 +28,7 @@ df_luiss_merged = df_luiss_merged.drop(columns=['WL_opponent', 'HA_opponent', 'S
 #server = app.server
 
 mytitle = dcc.Markdown(children='')
-mygraph = dcc.Graph(id='mygraph', figure={})
+mygraph = dcc.Graph(id='mygraph_4', figure={})
 
 # Setting the dropdown menu
 home_away=dcc.Checklist(
@@ -120,7 +110,7 @@ layout = dbc.Container([
                 dbc.Col([
                     html.H6("Statistiche per Casa / Trasferta (HA)"),
                     dash_table.DataTable(
-                        id='table_ha',
+                        id='table_ha_4',
                         style_table={'overflowX': 'auto'},
                         style_cell={'textAlign': 'center', 'fontSize': 12},
                         page_size=20
@@ -129,7 +119,7 @@ layout = dbc.Container([
                 dbc.Col([
                     html.H6("Statistiche per Vittoria / Sconfitta (WL)"),
                     dash_table.DataTable(
-                        id='table_wl',
+                        id='table_wl_4',
                         style_table={'overflowX': 'auto'},
                         style_cell={'textAlign': 'center', 'fontSize': 12},
                         page_size=20
@@ -140,7 +130,7 @@ layout = dbc.Container([
                 dbc.Col([
                     html.H6("Statistiche per Casa / Trasferta (HA)"),
                     dash_table.DataTable(
-                        id='table_ha_2',
+                        id='table_ha_2_4',
                         style_table={'overflowX': 'auto'},
                         style_cell={'textAlign': 'center', 'fontSize': 12},
                         page_size=20
@@ -149,7 +139,7 @@ layout = dbc.Container([
                 dbc.Col([
                     html.H6("Statistiche per Vittoria / Sconfitta (WL)"),
                     dash_table.DataTable(
-                        id='table_wl_2',
+                        id='table_wl_2_4',
                         style_table={'overflowX': 'auto'},
                         style_cell={'textAlign': 'center', 'fontSize': 12},
                         page_size=20
@@ -288,15 +278,15 @@ print("Pivot HA:", df_luiss_pivot_wl.shape)
 # Callbacks and function definitions
 
 @callback(
-    Output('table_ha', 'data'),
-    Output('table_ha', 'columns'),
-    Output('table_wl', 'data'),
-    Output('table_wl', 'columns'),
-    Output('mygraph', 'figure'),
-    Output('table_ha_2', 'data'),
-    Output('table_ha_2', 'columns'),
-    Output('table_wl_2', 'data'),
-    Output('table_wl_2', 'columns'),
+    Output('table_ha_4', 'data'),
+    Output('table_ha_4', 'columns'),
+    Output('table_wl_4', 'data'),
+    Output('table_wl_4', 'columns'),
+    Output('mygraph_4', 'figure'),
+    Output('table_ha_2_4', 'data'),
+    Output('table_ha_2_4', 'columns'),
+    Output('table_wl_2_4', 'data'),
+    Output('table_wl_2_4', 'columns'),
     Input('checklist-items h/a', 'value'),
     Input('checklist-items w/l', 'value'),
     Input('radio-items statistiche', 'value')
